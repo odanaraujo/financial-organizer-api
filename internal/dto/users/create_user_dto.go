@@ -1,4 +1,4 @@
-package userentity
+package users
 
 import "time"
 
