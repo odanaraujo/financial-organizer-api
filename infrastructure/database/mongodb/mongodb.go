@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	MONGODB_URL     = "MONGODB_URL"
-	MONGODB_USER_DB = "MONGODB_USER_DB"
+	MONGODB_URL     = "DATA_BASE_MONGO_URL"
+	MONGODB_USER_DB = "MONGO_USERNAME"
 )
 
 func NewMongoDBConnection() (*mongo.Database, error) {
