@@ -5,6 +5,7 @@ import (
 	config "github.com/odanraujo/financial-organizer-api/config/env"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/database/mongodb"
 	"github.com/odanraujo/financial-organizer-api/internal/handler/routers"
+	"log"
 )
 
 func main() {
@@ -16,6 +17,8 @@ func main() {
 	database, err := mongodb.NewMongoDBConnection()
 
 	if err != nil {
+		log.Fatalf("error connection in database")
+		panic(err)
 		return //todo implements log and error
 	}
 	userController := routers.UserInitDependecies(database)
