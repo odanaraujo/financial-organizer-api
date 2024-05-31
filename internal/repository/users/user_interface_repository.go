@@ -2,17 +2,17 @@ package users
 
 import (
 	"context"
-	"database/sql"
 	userRequest "github.com/odanraujo/financial-organizer-api/internal/dto/users"
 	userResponse "github.com/odanraujo/financial-organizer-api/internal/response/users"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func NewUserRepository(database *sql.DB) UserRepository {
+func NewUserRepository(database *mongo.Database) UserRepository {
 	return &userRepository{database: database}
 }
 
 type userRepository struct {
-	database *sql.DB
+	database *mongo.Database
 }
 
 type UserRepository interface {
