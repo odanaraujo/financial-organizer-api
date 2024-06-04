@@ -15,6 +15,7 @@ type userRepository struct {
 	database *mongo.Database
 }
 
+//go:generate mockgen -destination=mocks/UserRepository_mock.go -package=mocks github.com/odanraujo/financial-organizer-api/internal/repository/users UserRepository
 type UserRepository interface {
-	CreateUser(ctx context.Context, address userRequest.Address) (userResponse.Address, error)
+	CreateUser(ctx context.Context, user userRequest.User) (userResponse.User, error)
 }
