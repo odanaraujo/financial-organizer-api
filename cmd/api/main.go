@@ -19,9 +19,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("error connection in database")
 		panic(err)
-		return //todo implements log and error
+		return //todo implement log and error
 	}
 	userController := routers.UserInitDependecies(database)
 	r := gin.Default()
 	routers.InitUserRouters(&r.RouterGroup, userController)
+
+	if err := r.Run(); err != nil {
+		return //todo implement log and error
+	}
 }
