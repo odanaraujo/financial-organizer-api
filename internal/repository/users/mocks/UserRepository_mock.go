@@ -6,11 +6,11 @@ package mocks
 
 import (
 	context "context"
+	"github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
+	users0 "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	users "github.com/odanraujo/financial-organizer-api/internal/dto/users"
-	users0 "github.com/odanraujo/financial-organizer-api/internal/response/users"
 )
 
 // MockUserRepository is a mock of UserRepository interface.

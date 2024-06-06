@@ -3,9 +3,9 @@ package users
 import (
 	"context"
 	"github.com/golang/mock/gomock"
-	dto "github.com/odanraujo/financial-organizer-api/internal/dto/users"
+	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
+	users0 "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
 	"github.com/odanraujo/financial-organizer-api/internal/repository/users/mocks"
-	users0 "github.com/odanraujo/financial-organizer-api/internal/response/users"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
