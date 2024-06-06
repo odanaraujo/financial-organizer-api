@@ -1,6 +1,9 @@
 package users
 
-import "time"
+import (
+	"github.com/klassmann/cpfcnpj"
+	"time"
+)
 
 type User struct {
 	ID            string    `json:"id"`
@@ -19,4 +22,9 @@ type Address struct {
 	State   string `json:"state"`
 	ZipCode string `json:"zip_code"`
 	Country string `json:"country"`
+}
+
+func (user User) IsValidCPF() bool {
+	user.CPF = cpfcnpj.Clean(user.CPF)
+	return cpfcnpj.ValidateCPF(user.CPF)
 }

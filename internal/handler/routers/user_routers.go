@@ -6,5 +6,5 @@ import (
 )
 
 func InitUserRouters(r *gin.RouterGroup, handler users.UserHandler) {
-	r.POST("/routers", handler.CreateUser)
+	r.POST("/financial/createuser", handler.CreateUser)
 }

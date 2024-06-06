@@ -2,10 +2,10 @@ package users
 
 import (
 	"context"
-	userRequest "github.com/odanraujo/financial-organizer-api/internal/dto/users"
-	userResponse "github.com/odanraujo/financial-organizer-api/internal/response/users"
+	"github.com/odanraujo/financial-organizer-api/infrastructure/excp"
+	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 )
 
-func (use *userUsecase) CreateUser(ctx context.Context, user userRequest.User) (userResponse.User, error) {
-	return userResponse.User{}, nil
+func (use *userUsecase) CreateUser(ctx context.Context, user entity.CreateUser) (entity.CreateUser, *excp.Exception) {
+	return entity.CreateUser{}, nil
 }
