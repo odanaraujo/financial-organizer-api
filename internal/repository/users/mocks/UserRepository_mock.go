@@ -6,11 +6,11 @@ package mocks
 
 import (
 	context "context"
-	"github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
-	users0 "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	excp "github.com/odanraujo/financial-organizer-api/infrastructure/excp"
+	users "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 )
 
 // MockUserRepository is a mock of UserRepository interface.
@@ -37,11 +37,11 @@ func (m *MockUserRepository) EXPECT() *MockUserRepositoryMockRecorder {
 }
 
 // CreateUser mocks base method.
-func (m *MockUserRepository) CreateUser(arg0 context.Context, arg1 users.User) (users0.User, error) {
+func (m *MockUserRepository) CreateUser(arg0 context.Context, arg1 users.CreateUser) (users.CreateUser, *excp.Exception) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateUser", arg0, arg1)
-	ret0, _ := ret[0].(users0.User)
-	ret1, _ := ret[1].(error)
+	ret0, _ := ret[0].(users.CreateUser)
+	ret1, _ := ret[1].(*excp.Exception)
 	return ret0, ret1
 }
 

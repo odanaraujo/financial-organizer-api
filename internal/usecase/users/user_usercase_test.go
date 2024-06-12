@@ -3,8 +3,7 @@ package users
 import (
 	"context"
 	"github.com/golang/mock/gomock"
-	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
-	users0 "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
+	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 	"github.com/odanraujo/financial-organizer-api/internal/repository/users/mocks"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -23,7 +22,7 @@ func TestCreateUser(t *testing.T) {
 
 	ctx := context.Background()
 
-	address := dto.Address{
+	address := entity.Address{
 		Street:  "rua sem nome",
 		City:    "Recife",
 		State:   "PE",
@@ -31,7 +30,7 @@ func TestCreateUser(t *testing.T) {
 		Country: "Brazil",
 	}
 
-	user := dto.User{
+	user := entity.CreateUser{
 		ID:        "1",
 		Name:      "test",
 		CPF:       "99999999999",
@@ -45,7 +44,7 @@ func TestCreateUser(t *testing.T) {
 
 	type args struct {
 		ctx  context.Context
-		user dto.User
+		user entity.CreateUser
 	}
 
 	tests := []struct {
@@ -60,7 +59,7 @@ func TestCreateUser(t *testing.T) {
 				userRepo: func(mocks *mocks.MockUserRepository) *mocks.MockUserRepository {
 					mocks.EXPECT().CreateUser(gomock.AssignableToTypeOf(ctx), user).
 						Times(1).
-						Return(users0.User{Name: user.Name}, nil)
+						Return(entity.CreateUser{Name: user.Name}, nil)
 					return mocks
 				},
 			},
@@ -76,12 +75,21 @@ func TestCreateUser(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
+			// Crie um novo mock para cada iteração do loop
 			userRepo := mocks.NewMockUserRepository(ctrl)
 
+			// Configure o comportamento esperado do mock, se aplicável
+			if test.fields.userRepo != nil {
+				userRepo = test.fields.userRepo(userRepo)
+			}
+
+			// Crie uma instância do use case com o mock configurado
 			instance := NewUserUsecase(userRepo)
 
+			// Chame o método do use case que está sendo testado
 			_, err := instance.CreateUser(test.args.ctx, test.args.user)
 
+			// Verifique se o resultado do teste corresponde ao esperado
 			assert.Nil(t, err)
 		})
 	}
