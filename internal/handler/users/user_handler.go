@@ -29,6 +29,7 @@ func (u *userHandler) CreateUser(ctx *gin.Context) {
 	if ex != nil {
 		logger.Error("error the trying create user", ex, zap.String("Journey", "CreateUser"))
 		ctx.JSON(ex.Code, ex)
+		return
 	}
 
 	logger.Info("user created successfuly", zap.String("Journey", "CreateUser"))
