@@ -2,9 +2,13 @@ package users
 
 import (
 	"context"
-	userRequest "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
-	userResponse "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
+	"github.com/odanraujo/financial-organizer-api/infrastructure/excp"
+	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 	"go.mongodb.org/mongo-driver/mongo"
+)
+
+const (
+	MONGODB_USER_COLLECTION = "MONGODB_USER_COLLECTION"
 )
 
 func NewUserRepository(database *mongo.Database) UserRepository {
@@ -17,5 +21,5 @@ type userRepository struct {
 
 //go:generate mockgen -destination=mocks/UserRepository_mock.go -package=mocks github.com/odanraujo/financial-organizer-api/internal/repository/users UserRepository
 type UserRepository interface {
-	CreateUser(ctx context.Context, user userRequest.User) (userResponse.User, error)
+	CreateUser(ctx context.Context, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 }

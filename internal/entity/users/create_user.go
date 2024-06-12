@@ -1,6 +1,7 @@
 package users
 
 import (
+	"github.com/klassmann/cpfcnpj"
 	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
 	"time"
 )
@@ -40,4 +41,9 @@ func NewCreateUser(dto dto.User) CreateUser {
 		CurrentSalary: dto.CurrentSalary,
 		UsersInvolved: dto.UsersInvolved,
 	}
+}
+
+func (user CreateUser) IsValidCPF() bool {
+	user.CPF = cpfcnpj.Clean(user.CPF)
+	return cpfcnpj.ValidateCPF(user.CPF)
 }

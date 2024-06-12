@@ -12,8 +12,8 @@ DATABASE_URL: Aqui fica a url de conexão com o banco de dados.
 type Config struct {
 	GoEnv        string `mapstructure:"GO_ENV"`
 	GoPort       string `mapstructure:"GO_PORT"`
-	DatabaseURL  string `mapstructure:"DATA_BASE_MONGO_URL"`
-	DatabaseUser string `mapstructure:"MONGO_USERNAME"`
+	DatabaseURL  string `mapstructure:"DATA_BASE_MONGO_URL_LOCALHOST"`
+	DatabaseUser string `mapstructure:"MONGO_DATABASE"`
 }
 
 func LoadingConfig(path string) (*Config, error) {
