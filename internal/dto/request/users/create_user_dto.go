@@ -22,5 +22,3 @@ type Address struct {
 	ZipCode string `json:"zip_code"`
 	Country string `json:"country"`
 }
-
-//commit
