@@ -10,6 +10,7 @@ type CreateUser struct {
 	ID            string
 	Name          string
 	CPF           string
+	Email         string
 	BirthDate     time.Time
 	Address       Address
 	CurrentSalary float64
@@ -33,9 +34,9 @@ func NewCreateUser(dto dto.User) CreateUser {
 		Country: dto.Address.Country,
 	}
 	return CreateUser{
-		ID:            dto.ID,
 		Name:          dto.Name,
 		CPF:           dto.CPF,
+		Email:         dto.Email,
 		BirthDate:     dto.BirthDate,
 		Address:       address,
 		CurrentSalary: dto.CurrentSalary,

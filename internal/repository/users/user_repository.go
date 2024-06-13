@@ -30,5 +30,5 @@ func (repo *userRepository) CreateUser(ctx context.Context, user entity.CreateUs
 		logger.Info("Failed to convert InsertedID to ObjectID")
 	}
 
-	return entity.CreateUser{}, nil
+	return user, nil
 }
