@@ -17,12 +17,18 @@ func (use *userUsecase) CreateUser(ctx context.Context, userEntity entity.Create
 		return entity.CreateUser{}, ex
 	}
 
+	if !userEntity.IsValidZipCodeFormat() {
+		ex := excp.BadRequestException("is not a valid zip code")
+		logger.Error("is not a valid zip code", ex, zap.String("Journey", "CreateUser"))
+		return entity.CreateUser{}, ex
+	}
+
 	userResult, ex := use.repo.CreateUser(ctx, userEntity)
 
 	if ex != nil {
 		logger.Error("unable to create database", ex)
 		return entity.CreateUser{}, ex
 	}
-	
+
 	return userResult, nil
 }

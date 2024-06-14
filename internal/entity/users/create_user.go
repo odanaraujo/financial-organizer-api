@@ -3,8 +3,13 @@ package users
 import (
 	"github.com/klassmann/cpfcnpj"
 	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
+	"regexp"
 	"time"
 )
+
+const zipCodeRegexPattern = `^\d{5}-?\d{3}$`
+
+var zipCodeRegex = regexp.MustCompile(zipCodeRegexPattern)
 
 type CreateUser struct {
 	ID            string
@@ -47,4 +52,8 @@ func NewCreateUser(dto dto.User) CreateUser {
 func (user CreateUser) IsValidCPF() bool {
 	user.CPF = cpfcnpj.Clean(user.CPF)
 	return cpfcnpj.ValidateCPF(user.CPF)
+}
+
+func (user CreateUser) IsValidZipCodeFormat() bool {
+	return zipCodeRegex.MatchString(user.Address.ZipCode)
 }
