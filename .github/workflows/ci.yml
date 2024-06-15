@@ -3,7 +3,8 @@ name: Financial Organization API Continuous Deployment
 on:
   pull_request:
     branches:
-      ['main', 'develop']
+      - main
+      - develop
 
 jobs:
   financial-integration-continuous:
