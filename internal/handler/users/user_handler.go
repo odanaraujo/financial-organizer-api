@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/logger"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/validator"
@@ -34,6 +33,5 @@ func (u *userHandler) CreateUser(ctx *gin.Context) {
 
 	logger.Info("user created successfuly", zap.String("Journey", "CreateUser"))
 	result := response.ConverterDomainToResponse(domainResult)
-	fmt.Println(result)
 	ctx.JSON(http.StatusOK, result)
 }

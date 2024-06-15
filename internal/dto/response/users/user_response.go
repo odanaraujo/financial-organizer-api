@@ -6,13 +6,14 @@ import (
 )
 
 type User struct {
-	ID            string    `json:"id"`
-	Name          string    `json:"name"`
-	CPF           string    `json:"cpf"`
-	BirthDate     time.Time `json:"birth_date"`
-	Address       Address   `json:"Address"`
-	CurrentSalary float64   `json:"current_salary"`
-	UsersInvolved []string  `json:"users_involved"`
+	ID            string   `json:"id"`
+	Name          string   `json:"name"`
+	CPF           string   `json:"cpf"`
+	Email         string   `json:"email"`
+	BirthDate     string   `json:"birth_date"`
+	Address       Address  `json:"Address"`
+	CurrentSalary float64  `json:"current_salary"`
+	UsersInvolved []string `json:"users_involved"`
 }
 
 type Address struct {
@@ -36,7 +37,8 @@ func ConverterDomainToResponse(userDomain entity.CreateUser) *User {
 		ID:            userDomain.ID,
 		Name:          userDomain.Name,
 		CPF:           userDomain.CPF,
-		BirthDate:     userDomain.BirthDate,
+		Email:         userDomain.Email,
+		BirthDate:     userDomain.BirthDate.Format(time.RFC3339),
 		Address:       address,
 		CurrentSalary: userDomain.CurrentSalary,
 		UsersInvolved: userDomain.UsersInvolved,
