@@ -2,16 +2,20 @@ package users
 
 import (
 	"context"
+	"testing"
+	"time"
+
 	"github.com/golang/mock/gomock"
+	"github.com/odanraujo/financial-organizer-api/infrastructure/excp"
 	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 	"github.com/odanraujo/financial-organizer-api/internal/repository/users/mocks"
 	"github.com/stretchr/testify/assert"
-	"testing"
-	"time"
 )
 
 func TestNewUserUsecase(t *testing.T) {
 	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
 	rp := mocks.NewMockUserRepository(ctrl)
 	instance := NewUserUsecase(rp)
 
@@ -19,7 +23,6 @@ func TestNewUserUsecase(t *testing.T) {
 }
 
 func TestCreateUser(t *testing.T) {
-
 	ctx := context.Background()
 
 	address := entity.Address{
@@ -31,7 +34,6 @@ func TestCreateUser(t *testing.T) {
 	}
 
 	user := entity.CreateUser{
-		ID:        "1",
 		Name:      "test",
 		CPF:       "99999999999",
 		BirthDate: time.Now(),
@@ -51,15 +53,19 @@ func TestCreateUser(t *testing.T) {
 		name    string
 		fields  fields
 		args    args
-		wantErr error
+		wantErr *excp.Exception
 	}{
 		{
 			name: "Should return create user success",
 			fields: fields{
 				userRepo: func(mocks *mocks.MockUserRepository) *mocks.MockUserRepository {
-					mocks.EXPECT().CreateUser(gomock.AssignableToTypeOf(ctx), user).
-						Times(1).
-						Return(entity.CreateUser{Name: user.Name}, nil)
+					mocks.EXPECT().CreateUser(gomock.AssignableToTypeOf(ctx), gomock.Any()).
+						DoAndReturn(func(ctx context.Context, u entity.CreateUser) (entity.CreateUser, error) {
+							assert.Equal(t, "test", u.Name)
+							assert.Equal(t, "99999999999", u.CPF)
+							assert.Equal(t, address, u.Address)
+							return entity.CreateUser{Name: u.Name}, nil
+						}).Times(1)
 					return mocks
 				},
 			},
@@ -75,22 +81,17 @@ func TestCreateUser(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			// Crie um novo mock para cada iteração do loop
 			userRepo := mocks.NewMockUserRepository(ctrl)
 
-			// Configure o comportamento esperado do mock, se aplicável
 			if test.fields.userRepo != nil {
 				userRepo = test.fields.userRepo(userRepo)
 			}
 
-			// Crie uma instância do use case com o mock configurado
 			instance := NewUserUsecase(userRepo)
 
-			// Chame o método do use case que está sendo testado
 			_, err := instance.CreateUser(test.args.ctx, test.args.user)
 
-			// Verifique se o resultado do teste corresponde ao esperado
-			assert.Nil(t, err)
+			assert.Equal(t, test.wantErr, err)
 		})
 	}
 }
