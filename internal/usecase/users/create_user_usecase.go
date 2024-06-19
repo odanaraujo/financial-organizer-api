@@ -2,6 +2,7 @@ package users
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/excp"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/logger"
 	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
@@ -22,6 +23,8 @@ func (use *userUsecase) CreateUser(ctx context.Context, userEntity entity.Create
 		logger.Error("is not a valid zip code", ex, zap.String("Journey", "CreateUser"))
 		return entity.CreateUser{}, ex
 	}
+
+	userEntity.ID = uuid.New().String()
 
 	userResult, ex := use.repo.CreateUser(ctx, userEntity)
 

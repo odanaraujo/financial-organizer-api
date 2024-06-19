@@ -7,16 +7,14 @@ import (
 	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 )
 
-func (use *userUsecase) GetUser(ctx context.Context, ID string) (entity.CreateUser, *excp.Exception) {
-	logger.Info("init GetUser in usecase")
+func (use *userUsecase) GetUserFotCPFOrEmail(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception) {
+	logger.Info("init GetUserFotCPFOrEmail in usecase")
 
-	result, ex := use.repo.GetUser(ctx, ID)
+	result, ex := use.repo.GetUserFotCPFOrEmail(ctx, CPFOrEmail)
 
 	if ex != nil {
 		return entity.CreateUser{}, ex
 	}
-
-	result.ID = ID
 
 	return result, nil
 }
