@@ -7,14 +7,29 @@ import (
 	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 )
 
-func (use *userUsecase) GetUserFotCPFOrEmail(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception) {
-	logger.Info("init GetUserFotCPFOrEmail in usecase")
+func (use *userUsecase) GetUserForCPF(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception) {
+	logger.Info("init GetUserForCPF in usecase")
 
-	result, ex := use.repo.GetUserFotCPFOrEmail(ctx, CPFOrEmail)
+	user := entity.CreateUser{}
+	user.CPF = CPFOrEmail
+	user.Email = CPFOrEmail
 
-	if ex != nil {
-		return entity.CreateUser{}, ex
+	var ex *excp.Exception
+
+	if user.IsValidCPF() {
+
+		user, ex = use.repo.GetUserForCPF(ctx, user.FormatCPF(CPFOrEmail))
+		if ex == nil {
+			return user, nil
+		}
 	}
 
-	return result, nil
+	if user.IsValidEmail() {
+		user, ex = use.repo.GetUserForEmail(ctx, CPFOrEmail)
+		if ex == nil {
+			return user, nil
+		}
+	}
+
+	return entity.CreateUser{}, excp.BadRequestException("is not a valid parameter")
 }

@@ -12,25 +12,22 @@ import (
 	"go.uber.org/zap"
 )
 
-func (repo *userRepository) GetUserFotCPFOrEmail(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception) {
+func (repo *userRepository) GetUserForEmail(ctx context.Context, email string) (entity.CreateUser, *excp.Exception) {
 
-	logger.Info("init GetUserFotCPFOrEmail repository", zap.String("Journey", "GetUserFotCPFOrEmail"))
+	logger.Info("init GetUserForEmail repository", zap.String("Journey", "GetUserForEmail"))
 
 	collectionName := viper.GetString(MONGODB_USER_COLLECTION)
 	collection := repo.database.Collection(collectionName)
 
 	userentity := entity.CreateUser{}
 
-	filter := bson.D{{Key: "cpf", Value: CPFOrEmail}}
+	filter := bson.D{{Key: "email", Value: email}}
 
 	ex := collection.FindOne(ctx, filter).Decode(&userentity)
 	if ex == mongo.ErrNoDocuments {
-		filter = bson.D{{Key: "email", Value: CPFOrEmail}}
-		ex = collection.FindOne(ctx, filter).Decode(&userentity)
-		if ex == mongo.ErrNoDocuments {
-			errMessage := fmt.Sprintf("user not found with this params %s", CPFOrEmail)
-			return userentity, excp.NotFoundException(errMessage)
-		}
+		errMessage := fmt.Sprintf("user not found with this email %s", email)
+		return userentity, excp.NotFoundException(errMessage)
+
 	}
 
 	return userentity, nil
