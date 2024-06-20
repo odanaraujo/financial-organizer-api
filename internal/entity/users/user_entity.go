@@ -56,6 +56,26 @@ func NewCreateUser(dto dto.User) CreateUser {
 	}
 }
 
+func NewUpdateUser(dto dto.User) CreateUser {
+	address := Address{
+		Street:  dto.Address.Street,
+		City:    dto.Address.City,
+		State:   dto.Address.State,
+		ZipCode: dto.Address.ZipCode,
+		Country: dto.Address.Country,
+	}
+	return CreateUser{
+		ID:            dto.ID,
+		Name:          dto.Name,
+		CPF:           dto.CPF,
+		Email:         dto.Email,
+		BirthDate:     dto.BirthDate,
+		Address:       address,
+		CurrentSalary: dto.CurrentSalary,
+		UsersInvolved: dto.UsersInvolved,
+	}
+}
+
 func (user CreateUser) IsValidCPF() bool {
 	user.CPF = cpfcnpj.Clean(user.CPF)
 	return cpfcnpj.ValidateCPF(user.CPF)

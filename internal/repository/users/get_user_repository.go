@@ -12,6 +12,27 @@ import (
 	"go.uber.org/zap"
 )
 
+func (repo *userRepository) GetUserForCPF(ctx context.Context, cpf string) (entity.CreateUser, *excp.Exception) {
+
+	logger.Info("init GetUserForCPF repository", zap.String("Journey", "GetUserForCPF"))
+
+	collectionName := viper.GetString(MONGODB_USER_COLLECTION)
+	collection := repo.database.Collection(collectionName)
+
+	userentity := entity.CreateUser{}
+
+	filter := bson.D{{Key: "cpf", Value: cpf}}
+
+	ex := collection.FindOne(ctx, filter).Decode(&userentity)
+	if ex == mongo.ErrNoDocuments {
+		errMessage := fmt.Sprintf("user not found with this cpf %s", cpf)
+		return userentity, excp.NotFoundException(errMessage)
+
+	}
+
+	return userentity, nil
+}
+
 func (repo *userRepository) GetUserForEmail(ctx context.Context, email string) (entity.CreateUser, *excp.Exception) {
 
 	logger.Info("init GetUserForEmail repository", zap.String("Journey", "GetUserForEmail"))

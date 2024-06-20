@@ -19,4 +19,5 @@ func NewUserUsecase(repo users.UserRepository) UserUsercase {
 type UserUsercase interface {
 	CreateUser(ctx context.Context, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 	GetUserForCPF(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception)
+	UpdateUserForCPFOrEmail(ctx context.Context, CPFOrEmail string, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 }

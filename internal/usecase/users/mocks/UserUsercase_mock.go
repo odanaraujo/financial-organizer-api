@@ -65,3 +65,18 @@ func (mr *MockUserUsercaseMockRecorder) GetUserForCPF(arg0, arg1 interface{}) *g
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPF", reflect.TypeOf((*MockUserUsercase)(nil).GetUserForCPF), arg0, arg1)
 }
+
+// UpdateUserForCPFOrEmail mocks base method.
+func (m *MockUserUsercase) UpdateUserForCPFOrEmail(arg0 context.Context, arg1 string, arg2 users.CreateUser) (users.CreateUser, *excp.Exception) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUserForCPFOrEmail", arg0, arg1, arg2)
+	ret0, _ := ret[0].(users.CreateUser)
+	ret1, _ := ret[1].(*excp.Exception)
+	return ret0, ret1
+}
+
+// UpdateUserForCPFOrEmail indicates an expected call of UpdateUserForCPFOrEmail.
+func (mr *MockUserUsercaseMockRecorder) UpdateUserForCPFOrEmail(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUserForCPFOrEmail", reflect.TypeOf((*MockUserUsercase)(nil).UpdateUserForCPFOrEmail), arg0, arg1, arg2)
+}

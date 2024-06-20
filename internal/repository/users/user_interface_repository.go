@@ -24,4 +24,6 @@ type UserRepository interface {
 	CreateUser(ctx context.Context, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 	GetUserForCPF(ctx context.Context, cpf string) (entity.CreateUser, *excp.Exception)
 	GetUserForEmail(ctx context.Context, email string) (entity.CreateUser, *excp.Exception)
+	UpdateUserForCPF(ctx context.Context, cpf string, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
+	UpdateUserForEmail(ctx context.Context, email string, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 }

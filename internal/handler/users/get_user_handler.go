@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (u *userHandler) GetUserFotCPFOrEmail(ctx *gin.Context) {
+func (u *userHandler) GetUserForCPFOrEmail(ctx *gin.Context) {
 	logger.Info("init request GetUserForCPF")
 
 	cpfOrEmail := ctx.Param("cpfOrEmail")

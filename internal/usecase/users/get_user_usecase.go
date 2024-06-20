@@ -31,5 +31,5 @@ func (use *userUsecase) GetUserForCPF(ctx context.Context, CPFOrEmail string) (e
 		}
 	}
 
-	return entity.CreateUser{}, excp.BadRequestException("is not a valid parameter")
+	return entity.CreateUser{}, excp.BadRequestException("CPF or email parameter is mandatory")
 }
