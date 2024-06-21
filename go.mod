@@ -8,7 +8,9 @@ require (
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/golang/mock v1.6.0
+	github.com/google/uuid v1.6.0
 	github.com/klassmann/cpfcnpj v0.0.0-20200907140233-a595c5fd8de1
+	github.com/samber/lo v1.39.0
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.9.0
 	go.mongodb.org/mongo-driver v1.15.0
@@ -26,7 +28,6 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.2 // indirect

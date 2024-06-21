@@ -51,17 +51,32 @@ func (mr *MockUserUsercaseMockRecorder) CreateUser(arg0, arg1 interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*MockUserUsercase)(nil).CreateUser), arg0, arg1)
 }
 
-// GetUserFotCPFOrEmail mocks base method.
-func (m *MockUserUsercase) GetUserFotCPFOrEmail(arg0 context.Context, arg1 string) (users.CreateUser, *excp.Exception) {
+// GetUserForCPF mocks base method.
+func (m *MockUserUsercase) GetUserForCPFOrEmail(arg0 context.Context, arg1 string) (users.CreateUser, *excp.Exception) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUserFotCPFOrEmail", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetUserForCPFOrEmail", arg0, arg1)
 	ret0, _ := ret[0].(users.CreateUser)
 	ret1, _ := ret[1].(*excp.Exception)
 	return ret0, ret1
 }
 
-// GetUserFotCPFOrEmail indicates an expected call of GetUserFotCPFOrEmail.
-func (mr *MockUserUsercaseMockRecorder) GetUserFotCPFOrEmail(arg0, arg1 interface{}) *gomock.Call {
+// GetUserForCPF indicates an expected call of GetUserForCPF.
+func (mr *MockUserUsercaseMockRecorder) GetUserForCPF(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserFotCPFOrEmail", reflect.TypeOf((*MockUserUsercase)(nil).GetUserFotCPFOrEmail), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPFOrEmail", reflect.TypeOf((*MockUserUsercase)(nil).GetUserForCPFOrEmail), arg0, arg1)
+}
+
+// UpdateUserForCPFOrEmail mocks base method.
+func (m *MockUserUsercase) UpdateUserForCPFOrEmail(arg0 context.Context, arg1 string, arg2 users.CreateUser) (users.CreateUser, *excp.Exception) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUserForCPFOrEmail", arg0, arg1, arg2)
+	ret0, _ := ret[0].(users.CreateUser)
+	ret1, _ := ret[1].(*excp.Exception)
+	return ret0, ret1
+}
+
+// UpdateUserForCPFOrEmail indicates an expected call of UpdateUserForCPFOrEmail.
+func (mr *MockUserUsercaseMockRecorder) UpdateUserForCPFOrEmail(arg0, arg1, arg2 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUserForCPFOrEmail", reflect.TypeOf((*MockUserUsercase)(nil).UpdateUserForCPFOrEmail), arg0, arg1, arg2)
 }

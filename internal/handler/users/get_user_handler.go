@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-func (u *userHandler) GetUserFotCPFOrEmail(ctx *gin.Context) {
-	logger.Info("init request GetUserFotCPFOrEmail")
+func (u *userHandler) GetUserForCPFOrEmail(ctx *gin.Context) {
+	logger.Info("init request GetUserForCPFOrEmail")
 
 	cpfOrEmail := ctx.Param("cpfOrEmail")
 
@@ -20,7 +20,7 @@ func (u *userHandler) GetUserFotCPFOrEmail(ctx *gin.Context) {
 		return
 	}
 
-	result, err := u.usecase.GetUserFotCPFOrEmail(ctx, cpfOrEmail)
+	result, err := u.usecase.GetUserForCPFOrEmail(ctx, cpfOrEmail)
 
 	if err != nil {
 		logger.Error("exception when searching for user", err)

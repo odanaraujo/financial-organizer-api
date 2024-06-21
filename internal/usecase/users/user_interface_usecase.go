@@ -18,5 +18,6 @@ func NewUserUsecase(repo users.UserRepository) UserUsercase {
 //go:generate mockgen -destination=mocks/UserUsercase_mock.go -package=mocks github.com/odanraujo/financial-organizer-api/internal/usecase/users UserUsercase
 type UserUsercase interface {
 	CreateUser(ctx context.Context, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
-	GetUserFotCPFOrEmail(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception)
+	GetUserForCPFOrEmail(ctx context.Context, CPFOrEmail string) (entity.CreateUser, *excp.Exception)
+	UpdateUserForCPFOrEmail(ctx context.Context, CPFOrEmail string, user entity.CreateUser) (entity.CreateUser, *excp.Exception)
 }

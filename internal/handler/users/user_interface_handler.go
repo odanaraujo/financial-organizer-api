@@ -15,5 +15,6 @@ type userHandler struct {
 
 type UserHandler interface {
 	CreateUser(ctx *gin.Context)
-	GetUserFotCPFOrEmail(ctx *gin.Context)
+	GetUserForCPFOrEmail(ctx *gin.Context)
+	UpdateUser(ctx *gin.Context)
 }
