@@ -9,7 +9,7 @@ import (
 )
 
 func (u *userHandler) GetUserForCPFOrEmail(ctx *gin.Context) {
-	logger.Info("init request GetUserForCPF")
+	logger.Info("init request GetUserForCPFOrEmail")
 
 	cpfOrEmail := ctx.Param("cpfOrEmail")
 
@@ -20,7 +20,7 @@ func (u *userHandler) GetUserForCPFOrEmail(ctx *gin.Context) {
 		return
 	}
 
-	result, err := u.usecase.GetUserForCPF(ctx, cpfOrEmail)
+	result, err := u.usecase.GetUserForCPFOrEmail(ctx, cpfOrEmail)
 
 	if err != nil {
 		logger.Error("exception when searching for user", err)

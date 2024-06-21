@@ -4,9 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/excp"
 	"github.com/odanraujo/financial-organizer-api/infrastructure/logger"
-	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users"
+	dto "github.com/odanraujo/financial-organizer-api/internal/dto/request/users/update"
 	response "github.com/odanraujo/financial-organizer-api/internal/dto/response/users"
-	entity "github.com/odanraujo/financial-organizer-api/internal/entity/users"
 	"go.uber.org/zap"
 	"net/http"
 )
@@ -14,7 +13,7 @@ import (
 func (u *userHandler) UpdateUser(ctx *gin.Context) {
 	logger.Info("init request UpdateUser")
 
-	request := dto.User{}
+	request := dto.UserRequest{}
 
 	cpfOrEmail := ctx.Param("cpfOrEmail")
 	if cpfOrEmail == "" {
@@ -24,17 +23,27 @@ func (u *userHandler) UpdateUser(ctx *gin.Context) {
 		return
 	}
 
-	if err := ctx.ShouldBindJSON(&request); err != nil {
-		logger.Error("error trying validate to user", err, zap.String(
+	if ex := ctx.ShouldBindJSON(&request); ex != nil {
+		logger.Error("error trying validate to user", ex, zap.String(
 			"Journey", "UpdateUser"))
-		errMessage := excp.InternalServerException(err.Error())
+		errMessage := excp.InternalServerException(ex.Error())
 		ctx.JSON(errMessage.Code, errMessage)
 		return
 	}
 
-	userDomain := entity.NewUpdateUser(request)
+	userDatabase, ex := u.usecase.GetUserForCPFOrEmail(ctx, cpfOrEmail)
 
-	result, ex := u.usecase.UpdateUserForCPFOrEmail(ctx, cpfOrEmail, userDomain)
+	if ex != nil {
+		logger.Error("error trying validate to user", ex, zap.String(
+			"Journey", "UpdateUser"))
+		errMessage := excp.InternalServerException(ex.Error())
+		ctx.JSON(errMessage.Code, errMessage)
+		return
+	}
+
+	userDatabase = request.FillModel(userDatabase)
+
+	result, ex := u.usecase.UpdateUserForCPFOrEmail(ctx, cpfOrEmail, userDatabase)
 
 	if ex != nil {
 		logger.Error("error when update for user in the database", ex, zap.String(

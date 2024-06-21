@@ -12,8 +12,6 @@ type User struct {
 	BirthDate     time.Time `json:"birth_date" example:"2020-01-20T23:00:00 -03:00" binding:"required"`
 	Address       Address   `json:"Address" binding:"required"`
 	CurrentSalary float64   `json:"current_salary"`
-	SharedAccount bool      `json:"shared_account"`
-	UsersInvolved []string  `json:"users_involved"`
 }
 
 type Address struct {

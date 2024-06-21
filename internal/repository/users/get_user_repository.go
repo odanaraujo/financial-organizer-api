@@ -14,7 +14,7 @@ import (
 
 func (repo *userRepository) GetUserForCPF(ctx context.Context, cpf string) (entity.CreateUser, *excp.Exception) {
 
-	logger.Info("init GetUserForCPF repository", zap.String("Journey", "GetUserForCPF"))
+	logger.Info("init GetUserForCPFOrEmail repository", zap.String("Journey", "GetUserForCPFOrEmail"))
 
 	collectionName := viper.GetString(MONGODB_USER_COLLECTION)
 	collection := repo.database.Collection(collectionName)

@@ -54,7 +54,7 @@ func (mr *MockUserRepositoryMockRecorder) CreateUser(arg0, arg1 interface{}) *go
 // GetUserForCPF mocks base method.
 func (m *MockUserRepository) GetUserForCPF(arg0 context.Context, arg1 string) (users.CreateUser, *excp.Exception) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUserForCPF", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetUserForCPFOrEmail", arg0, arg1)
 	ret0, _ := ret[0].(users.CreateUser)
 	ret1, _ := ret[1].(*excp.Exception)
 	return ret0, ret1
@@ -63,7 +63,7 @@ func (m *MockUserRepository) GetUserForCPF(arg0 context.Context, arg1 string) (u
 // GetUserForCPF indicates an expected call of GetUserForCPF.
 func (mr *MockUserRepositoryMockRecorder) GetUserForCPF(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPF", reflect.TypeOf((*MockUserRepository)(nil).GetUserForCPF), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPFOrEmail", reflect.TypeOf((*MockUserRepository)(nil).GetUserForCPF), arg0, arg1)
 }
 
 // GetUserForEmail mocks base method.

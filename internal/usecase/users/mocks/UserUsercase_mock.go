@@ -52,9 +52,9 @@ func (mr *MockUserUsercaseMockRecorder) CreateUser(arg0, arg1 interface{}) *gomo
 }
 
 // GetUserForCPF mocks base method.
-func (m *MockUserUsercase) GetUserForCPF(arg0 context.Context, arg1 string) (users.CreateUser, *excp.Exception) {
+func (m *MockUserUsercase) GetUserForCPFOrEmail(arg0 context.Context, arg1 string) (users.CreateUser, *excp.Exception) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUserForCPF", arg0, arg1)
+	ret := m.ctrl.Call(m, "GetUserForCPFOrEmail", arg0, arg1)
 	ret0, _ := ret[0].(users.CreateUser)
 	ret1, _ := ret[1].(*excp.Exception)
 	return ret0, ret1
@@ -63,7 +63,7 @@ func (m *MockUserUsercase) GetUserForCPF(arg0 context.Context, arg1 string) (use
 // GetUserForCPF indicates an expected call of GetUserForCPF.
 func (mr *MockUserUsercaseMockRecorder) GetUserForCPF(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPF", reflect.TypeOf((*MockUserUsercase)(nil).GetUserForCPF), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserForCPFOrEmail", reflect.TypeOf((*MockUserUsercase)(nil).GetUserForCPFOrEmail), arg0, arg1)
 }
 
 // UpdateUserForCPFOrEmail mocks base method.
